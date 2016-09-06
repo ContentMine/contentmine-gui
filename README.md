@@ -1,6 +1,6 @@
 ## Synopsis
 
-* This is the front end GUI for executing ContentMine commands, 
+This is the front end GUI for executing ContentMine commands, 
 implemented as a SPA to be run locally on the user's machine and to be 
 displayed in the browser.
 
