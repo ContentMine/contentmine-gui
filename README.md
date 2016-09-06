@@ -8,10 +8,10 @@ displayed in the browser.
 
 Currently requires:
 
-* getpapers
-* quickscrape
+* **getpapers**
+* **quickscrape**
 
-## OS Supported
+## OS Support
 
 Currently tested in Windows environment only, but will be tested in 
 other environments shortly.
@@ -20,9 +20,9 @@ other environments shortly.
 
 Execute the file appropriate to your OS from either of the below:
 
-* **./launchers/windows/ContentMine.bat**
-* **./launchers/mac/ContentMine.sh**
-* **./launchers/linux/ContentMine.sh**
+* **launchers/windows/ContentMine.bat**
+* **launchers/mac/ContentMine.sh**
+* **launchers/linux/ContentMine.sh**
 
 ## Features
 
