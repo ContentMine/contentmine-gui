@@ -1,0 +1,19 @@
+extends ../required/partials-req
+
+block partial-content
+  h1 GetPapers
+  form.basic-form
+    h4 API
+    +radio-inline("EuPMC","eupmc","eupmc")(ng-model='form.api',value='eupmc')
+    +radio-inline("CrossRef","crossref","crossref")(ng-model='form.api',value='crossref')
+    h4 Query
+    +input-simple("text","txtCommand","Enter your query...")(ng-model='form.query')
+    h4 Download
+    +checkbox-inline("Metadata")(ng-model='form.metadata',ng-disabled='!form.metadata_enabled')
+    +checkbox-inline("PDF")(ng-model='form.pdf',ng-show='form.pdf_show')
+    +checkbox-inline("XML")(ng-model='form.xml',ng-show='form.xml_show')
+    .spacer &nbsp;
+    +submit("Execute","default","execute")(ng-click='executeCmd()',ng-disabled='!form.submit_enabled')
+  .output
+    +panel-primary('Output')
+      .inner-box(ng-bind-html="output")

@@ -1,0 +1,65 @@
+include ../../../node_modules/jade-bootstrap/components/icons
+
+//- Input control with form-group wrapper
+mixin input(type,id,placeholder,label,name)
+  .form-group
+    label(for="#{id}") #{label}
+    input.form-control(type="#{type}",id="#{id}",placeholder="#{placeholder}",name="#{name}")&attributes(attributes)
+
+//- Simple form input control without a form-group
+mixin input-simple(type,id,placeholder)
+  input.form-control(type="#{type}",id="#{id}",placeholder="#{placeholder}")&attributes(attributes)
+
+//- Checkbox - Block style
+mixin checkbox(text,name,id)
+  .checkbox(ng-show=attributes['ng-show'])
+    label
+      input(type="checkbox",name="#{name}",id="#{id}")&attributes(attributes)
+      = text
+
+//- Checkbox - Inline style
+mixin checkbox-inline(text,name,id)
+  .checkbox-inline(ng-show=attributes['ng-show'])
+    label
+      input(type="checkbox",name="#{name}",id="#{id}")&attributes(attributes)
+      = text
+
+//- Radio box
+mixin radio(text,name,id)
+  .radio
+    label
+      input(type="radio",name="#{name}",id="#{id}")&attributes(attributes)
+      = text
+
+//- Radio box - Inline style
+mixin radio-inline(text,name,id)
+  .radio-inline
+    label.fixed
+      input(type="radio",name="#{name}",id="#{id}")&attributes(attributes)
+      = text
+
+//- Submit button
+mixin submit(text,name,id)
+  .form-group
+    button.btn.btn-default(type="submit",name="#{name}",id="#{id}")&attributes(attributes)= text
+
+//- Input group - both prepend and append options available, and block is passed
+mixin input-group(prepend,append)
+  .form-group
+    .input-group
+      unless !prepend
+        .input-group-addon
+          = prepend
+        block
+        unless !append
+          .input-group-addon
+            = append
+
+//- Icon button
+mixin icon-btn(icon)
+  button.btn.btn-default(type="button",aria-label="#{icon}")&attributes(attributes)
+    +icon(icon)
+
+//- Badges
+mixin badge(text)
+  span.badge= text

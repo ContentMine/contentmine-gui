@@ -1,0 +1,10 @@
+extends ../required/partials-req
+
+block partial-content
+  h1 Testing Command Execution
+  form.basic-form
+    +input("text","txtCommand","Enter your command...","Command","txtCommand")(ng-model='form_command')
+    +submit("Submit","default","submit")(ng-click='form_submitCmd()')
+  .output.tall
+    +panel-primary('Output')
+      .inner-box(ng-bind-html="output")

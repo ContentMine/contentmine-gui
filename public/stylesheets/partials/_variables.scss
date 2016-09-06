@@ -1,0 +1,58 @@
+// colors
+
+$color-menu-base: #46515c;          // Menu base color
+$color-menu-denim: #1784c7;         // Menu denim
+$color-menu-white: #ffffff;         // Menu white
+$color-menu-bright: #ff7e66;        // Menu bright elements
+$color-menu-light: #44a5e9;         // Menu light elements. This color MUST MATCH THE SVG ICONS for getpapers etc.
+$color-bgd: #FCFAF9;                // Contentmine standard background
+$color-orange: #E57937;             // Contentmine orange
+$color-name-1: #dbdbdb;             // Contentmine stylistic name color 1 ("Content")
+$color-name-1b: #98abb9;            // Contentmine stylistic name color 1, version B ("Content")
+$color-name-2: #000000;             // Contentmine stylistic name color 2 ("Mine")
+
+// image paths
+
+$path-icons: "../images/icons/";
+
+// other paths
+
+$path-fonts-google: "../fonts/google/";
+
+// fonts 
+
+$font-primary: 'Open Sans', sans-serif;
+$font-logo: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+// header size
+
+$header-height-S: 54px;
+$header-height-M: 66px;
+
+// logo positioning
+
+$logo-height: 36;
+$logo-width: 48;
+$logo-text-width: 132;
+
+$logo-y-responsive-adjustment: 6;
+$logo-x-responsive-adjustment: 8;
+$logo-x-aesthetic-adjustment: 4;
+
+$logo-height-original: 28;
+$logo-y-original: 13;
+$logo-y-improved-positioning: 4;
+
+$logo-y: ($logo-y-original + $logo-y-improved-positioning) + ($logo-height-original - $logo-height);
+
+$sidebar-width: 240; // Make sure this is equal in value to $sidebar-width-L below.
+$logo-total-width: $logo-width + $logo-text-width;
+$logo-equal-side-gap: ($sidebar-width - $logo-total-width) / 2;
+
+$logo-x: $logo-equal-side-gap - $logo-x-aesthetic-adjustment - $logo-x-responsive-adjustment;
+$logo-right-side-spacer: $logo-equal-side-gap + $logo-x-aesthetic-adjustment;
+
+// sidebar size
+
+$sidebar-width-M: 132px;
+$sidebar-width-L: 240px;

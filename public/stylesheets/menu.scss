@@ -1,0 +1,864 @@
+@import './bourbon/bourbon'; // http://bourbon.io/
+
+@import './partials/variables'; // custom variables
+
+@import './partials/mixins'; // custom mixins
+
+@import './partials/layout'; // responsive grid and media queries
+
+@import './partials/fonts'; // fonts saved locally
+
+/* --------------------------------
+
+Bootstrap cancellation for the navigation and menu.
+Primary style.
+
+-------------------------------- */
+
+body {
+
+  // Background color:
+  &.custom-bgd {
+    background-color: $color-bgd;
+  }
+
+  .cd-side-nav, .cd-main-header {
+    font: {
+      size: 2.3rem;
+      family: $font-primary; // variables inside partials > _variables.scss
+    }
+    color: $color-menu-base;
+    @include clearfix;
+  }
+
+  .cd-side-nav, .cd-main-header {
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+      display: none;
+    }
+  }
+
+  .cd-side-nav {
+    display: block;
+    *, *::after, *::before {
+      box-sizing: border-box;
+    }
+    ul {
+      margin: 0;
+      .cd-label {
+        line-height: 1em;
+      }
+      li {
+        a {
+          text-decoration: none;
+          background-color: transparent;
+          line-height: 1em;
+        }
+        a:active, a:hover {
+          color: $color-menu-white;
+          text-decoration: none;
+        }
+        a:focus {
+          outline: unset;
+          outline-offset: unset;
+          color: $color-menu-white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .cd-main-header {
+    display: block;
+    *, *::after, *::before {
+      box-sizing: border-box;
+    }
+    a {
+      text-decoration: none;
+      img {
+        vertical-align: baseline;
+        border: 0;
+      }
+      &:focus {
+        outline: unset;
+      }
+    }
+    .cd-search {
+      margin-left: (0px+$logo-right-side-spacer);
+      form > input {
+        font-family: $font-primary;
+        font-size: 2.3rem;
+        font: inherit;
+        line-height: inherit;
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+    }
+    .cd-top-nav {
+      margin: 0;
+      line-height: 1em;
+      li {
+        a {
+          color: $color-menu-white;
+          background-color: transparent;
+        }
+        a:focus {
+          outline: unset;
+          outline-offset: unset;
+        }
+      }
+    }
+    .cd-nav-trigger {
+      &:hover, &:focus {
+        outline: unset;
+        .nav-trigger-text {
+          visibility: hidden;
+        }
+      }
+      .nav-trigger-text {
+        display: inline-block;
+      }
+      span {
+        visibility: visible;
+      }
+    }
+  }
+
+  .cd-main-header::after {
+    box-sizing: border-box;
+  }
+
+}
+
+/* --------------------------------
+
+Main Page Content
+
+-------------------------------- */
+
+// Responsive options:
+.cd-main-content {
+
+  .content-wrapper {
+
+    // Small screens top positioning, padding-top overwritten for other screen sizes.
+    padding: $header-height-S 0 0 0;
+
+    // ALL SCREENS: Additional responsive options for main content wrapper:
+    // [...]
+
+  }
+
+  &::before {
+    /* never visible - used to check MQ in jQuery */
+    display: none;
+    content: 'mobile';
+  }
+
+  @include MQ(M) {
+
+    .content-wrapper {
+
+      margin-left: $sidebar-width-M;
+      padding-top: $header-height-M;
+
+      // MEDIUM SCREEN: Additional responsive options for main content wrapper:
+      // [...]
+
+    }
+
+    &::before {
+      content: 'tablet';
+    }
+  }
+
+  @include MQ(L) {
+
+    .content-wrapper {
+
+      margin-left: $sidebar-width-L;
+
+      // LARGE SCREEN: Additional responsive options for main content wrapper:
+      // [...]
+
+    }
+
+    &::before {
+      content: 'desktop';
+    }
+  }
+}
+
+/* --------------------------------
+
+Header
+
+-------------------------------- */
+
+.cd-main-header {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+
+  height: $header-height-S;
+  width: 100%;
+
+  background: $color-menu-base;
+  box-shadow: 0 1px 3px rgba(#000, .2);
+  @include clearfix;
+  @include font-smoothing;
+
+  @include MQ(M) {
+    position: fixed;
+    height: $header-height-M;
+  }
+}
+
+.cd-logo {
+  float: left;
+  display: inline-block;
+  margin: (0px+$logo-y) 0 0 (0px+$logo-x);
+  width: (0px+$logo-total-width);
+
+  img {
+    display: inline-block;
+    height: (0px+$logo-height);
+    width: (0px+$logo-width);
+  }
+
+  .name-holder {
+    display: inline-block;
+    width: (0px+$logo-text-width);
+    padding-left: 4px;
+    overflow: hidden;
+    span {
+      font-family: $font-logo;
+      font-size: 22px;
+      line-height: (0px+$logo-height);
+      &.name-1 {
+        color: $color-name-1;
+      }
+      &.name-2 {
+        color: $color-name-2;
+      }
+    }
+  }
+
+  @include MQ(M) {
+    margin: (0px+$logo-y+$logo-y-responsive-adjustment) 0 0 (0px+$logo-x+$logo-x-responsive-adjustment);
+  }
+}
+
+.cd-nav-trigger {
+  /* navigation trigger - visible on mobile devices only */
+  float: right;
+  position: relative;
+  display: block;
+  width: 41px;
+  height: 53px;
+  margin-right: 5%;
+  /* hide text */
+  overflow: hidden;
+  white-space: nowrap;
+  color: transparent;
+
+  span, span::before, span::after {
+    /* hamburger icon in CSS */
+    position: absolute;
+    display: inline-block;
+    height: 4px;
+    width: 31px;
+    background: $color-menu-white;
+  }
+
+  span {
+    /* line in the center */
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    margin-top: -2px;
+    @include transition(background .2s);
+  }
+
+  span::before, span::after {
+    /* other 2 lines */
+    content: '';
+    right: 0;
+    /* Force Hardware Acceleration in WebKit */
+    @include transform(translateZ(0));
+    @include backface-visibility(hidden);
+
+    @include transform-origin(0% 50%);
+    @include transition(transform .2s);
+  }
+
+  span::before {
+    /* menu icon top line */
+    top: -7px;
+  }
+
+  span::after {
+    /* menu icon bottom line */
+    top: 7px;
+  }
+
+  &.nav-is-visible {
+    span {
+      /* hide line in the center */
+      background: rgba($color-menu-white, 0);
+    }
+
+    span::before, span::after {
+      /* keep visible other 2 lines */
+      background: rgba($color-menu-white, 1);
+    }
+
+    span::before {
+      @include transform(translateX(5px) translateY(-4px) rotate(45deg));
+    }
+
+    span::after {
+      @include transform(translateX(5px) translateY(4px) rotate(-45deg));
+    }
+  }
+
+  @include MQ(M) {
+    display: none;
+  }
+}
+
+.cd-search {
+  position: relative;
+  margin: 1.4em 5% 0.7em;
+
+  &.is-hidden {
+    opacity: 0;
+  }
+
+  &::before {
+    /* lens icon */
+    content: '';
+    position: absolute;
+    left: 8px;
+    @include center(y);
+    height: 19px;
+    width: 19px;
+    background: url($path-icons + "cd-search.svg") no-repeat 0 0;
+  }
+
+  input {
+    padding-left: 38px;
+    width: 100%;
+    height: 43px;
+    border: none;
+    border-radius: .3em;
+    @include appearance(none);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // Disabling of the search function:
+  &.disabled {
+    border-left: 1px solid tint($color-menu-base, 10%);
+    * {
+      display: none;
+    }
+    &::before {
+      display: none;
+    }
+  }
+
+  @include MQ(M) {
+    float: left;
+    display: inline-block;
+    width: 300px;
+    height: 100%;
+    // padding: 12px 0;
+    margin: 0 0 0 3em;
+
+    &.is-hidden {
+      /* reset style */
+      opacity: 1;
+    }
+
+    &::before {
+      background-position: 0 -19px;
+      left: 1.2em;
+    }
+
+    form, input {
+      height: 100%;
+      width: 100%;
+    }
+
+    input {
+      border: none;
+      padding-left: 3.1em;
+      border-radius: 0;
+      background-color: $color-menu-base;
+      border-left: 1px solid tint($color-menu-base, 10%);
+      color: $color-menu-white;
+
+      @include placeholder {
+        color: tint($color-menu-base, 30%);
+      }
+    }
+  }
+}
+
+/* --------------------------------
+
+Top Navigation
+
+-------------------------------- */
+
+.cd-nav {
+  /* top nav - not visible on mobile devices */
+  display: none;
+
+  @include MQ(M) {
+    display: block;
+    float: right;
+    height: 100%;
+  }
+}
+
+.cd-top-nav {
+  > li > a::before  {
+    /* reset style */
+    display: none;
+  }
+
+  > li a {
+    padding: 1.2em 5% !important;
+  }
+
+  img {
+    /* avatar image */
+    position: absolute;
+    left: 2.2em;
+    @include center(y);
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    display: none;
+  }
+
+  @include MQ(M) {
+    height: 100%;
+
+    a {
+      display: block;
+      font-size: 1.7rem;
+      color: $color-menu-white;
+    }
+
+    > li {
+      display: inline-block;
+      margin-right: 1.2em;
+      height: 100%;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    > li a {
+      padding: 1.2em .7em !important;
+    }
+
+    img {
+      display: block;
+    }
+  }
+
+  @include MQ(L) {
+    li:not(.has-children) a:hover {
+      color: $color-menu-denim;
+    }
+  }
+}
+
+/* --------------------------------
+
+Sidebar
+
+-------------------------------- */
+
+.cd-side-nav {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: $header-height-S 0 0;
+  background-color: darken($color-menu-base, 8%);
+  visibility: hidden;
+  opacity: 0;
+  max-height: 100vh;
+  overflow: hidden;
+  @include font-smoothing;
+  @include transition(opacity .2s 0s, visibility 0s .2s);
+
+  &.nav-is-visible {
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
+    -webkit-overflow-scrolling: touch;
+    @include transition(opacity .2s 0s, visibility 0s 0s);
+    max-height: none;
+    box-shadow: 0 2px 12px rgba(#000, .2);
+  }
+
+  > ul {
+    padding: 0.7em 0;
+
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
+
+  .cd-label, a {
+    display: block;
+    padding: 1.2em 5%;
+  }
+
+  .cd-label {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $color-menu-light;
+    font-size: 1.2rem;
+    letter-spacing: .1em;
+  }
+
+  a {
+    position: relative;
+    color: $color-menu-white;
+    font-size: 1.7rem;
+  }
+
+  ul.cd-top-nav > li:last-of-type > a {
+    border-bottom: none;
+  }
+
+  > ul > li > a {
+    padding-left: calc(5% + 29px);
+    border-bottom: 1px solid darken($color-menu-base, 3%);
+
+    &::before {
+      /* icon before item name */
+      position: absolute;
+      content: '';
+      left: 5%;
+      @include center(y);
+      height: 19px;
+      width: 19px;
+    }
+  }
+
+  > ul > li.getpapers > a::before {
+    background-image: url($path-icons + "cd-getpapers.svg");
+  }
+
+  > ul > li.quickscrape > a::before {
+    background-image: url($path-icons + "cd-quickscrape.svg");
+  }
+
+  > ul > li.norma > a::before {
+    background-image: url($path-icons + "cd-norma.svg");
+  }
+
+  > ul > li.ami > a::before {
+    background-image: url($path-icons + "cd-ami.svg");
+  }
+
+  > ul > li.command > a::before {
+    background-image: url($path-icons + "cd-command.svg");
+  }
+
+  .count {
+    /* notification badge */
+    position: absolute;
+    @include center(y);
+    right: calc(5% + 19px + 0.5em);
+
+    padding: 0.2em 0.5em;
+    background-color: $color-menu-bright;
+    border-radius: .3em;
+
+    color: $color-menu-white;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .action-btn a {
+    display: block;
+    margin: 0 5%;
+    padding: 0.8em 0;
+    background-color: $color-menu-denim;
+    border-radius: .3em;
+    border: none;
+    box-shadow: 0 1px 4px rgba(#000, .3), inset 0 1px 0 rgba(#fff, .2);
+
+    text-align: center;
+    color: $color-menu-white;
+    font-weight: bold;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  @include MQ(M) {
+    position: relative;
+    float: left;
+    top: auto;
+    width: $sidebar-width-M;
+
+    // HACK: This was originally 100vh, but that led to some strange side-effects. Fixed by setting to 99vh.
+    min-height: 99vh;
+
+    padding-top: $header-height-M;
+    /* reset style */
+    visibility: visible;
+    opacity: 1;
+    overflow: visible;
+    max-height: none;
+
+    &.nav-is-visible {
+      box-shadow: none;
+    }
+
+    &.is-fixed {
+      position: fixed;
+    }
+
+    > ul {
+      /* reset style */
+      padding: 0;
+    }
+
+    .cd-label {
+      /* remove labels on minified version of the sidebar */
+      display: none;
+    }
+
+    a {
+      font-size: 1.7rem;
+      text-align: center;
+    }
+
+    > ul > li > a {
+      padding: calc(2.6em + 29px) 0 2.9em;
+
+      &::before {
+        @include center(x);
+        top: 2.9em;
+      }
+    }
+
+    .active > a {
+      /* current page */
+      box-shadow: inset 4px 0 0 $color-menu-denim;
+      background-color: darken($color-menu-base, 5%);
+    }
+
+    .action-btn a {
+      margin: 1.2em 10% 0;
+    }
+
+    .count {
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      box-shadow: 0 0 7px rgba(#000, .2);
+      padding: 0;
+      top: 2.4em;
+      @include transform(translateX(-50%));
+      left: calc(50% + 6px);
+      right: auto;
+      color: transparent;
+    }
+  }
+
+  @include MQ(L) {
+    width: $sidebar-width-L;
+
+    > ul {
+      padding: 0.7em 0;
+    }
+
+    > ul > li:not(.action-btn):hover > a {
+      background-color: darken($color-menu-base, 5%);
+    }
+
+    > ul > li > a {
+      padding: 1.2em 1.2em 1.2em 50px;
+      text-align: left;
+      border-bottom: none;
+
+      &::before {
+        @include center(y);
+        left: 22px;
+      }
+    }
+
+    .cd-label {
+      display: block;
+      padding: 1.2em 22px;
+    }
+
+    .action-btn {
+      text-align: left;
+
+      a {
+        margin: 0 22px;
+
+        .no-touch &:hover {
+          background-color: lighten($color-menu-denim, 5%);
+        }
+      }
+    }
+
+    .count {
+      /* reset style */
+      color: $color-menu-white;
+      height: auto;
+      width: auto;
+      border-radius: .3em;
+      padding: .2em .5em;
+      @include center(y);
+      right: 22px;
+      left: auto;
+      box-shadow: none;
+    }
+  }
+}
+
+.has-children {
+
+  ul {
+    position: relative;
+    width: 100%;
+    display: none;
+    background-color: darken($color-menu-base, 15%);
+  }
+
+  > a::after {
+    /* arrow icon */
+    position: absolute;
+    content: '';
+    height: 19px;
+    width: 19px;
+    right: 5%;
+    @include center(y);
+    background: url($path-icons + "cd-arrow.svg");
+  }
+
+  &.selected > ul {
+    display: block;
+  }
+
+  &.selected > a::after {
+    @include transform(translateY(-50%) rotate(180deg));
+  }
+
+  @include MQ(M) {
+    position: relative;
+
+    ul {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 192px;
+      padding: 0;
+      box-shadow: 0 2px 12px rgba(#000, .3);
+    }
+
+    ul a {
+      text-align: left;
+      border: none;
+      padding: 1em;
+
+      .no-touch &:hover {
+        color: $color-menu-denim;
+      }
+    }
+
+    > a::after {
+      display: none;
+    }
+
+    .cd-side-nav & {
+      &.selected > a {
+        /* focus state -> show sub pages */
+        background-color: darken($color-menu-base, 5%);
+      }
+    }
+
+    .cd-top-nav & {
+      position: relative;
+      background-color: darken($color-menu-base, 8%);
+
+      > a {
+        height: 100%;
+        padding: 0 calc(2.2em + 26px) 0 calc(2.2em + 31px) !important;
+        line-height: $header-height-M;
+
+        &::after {
+          display: block;
+          right: 2.2em;
+        }
+      }
+
+      ul {
+        background-color: darken($color-menu-base, 15%);
+        width: 280px;
+        top: 100%;
+        right: 0;
+        left: auto;
+        box-shadow: 0 1px 12px rgba(#000, .2);
+      }
+
+      ul a {
+        padding-left: 22px !important;
+      }
+    }
+  }
+
+  @include MQ(L) {
+
+    > ul {
+      width: 100%;
+      z-index: 1;
+    }
+
+    ul a {
+      padding-left: 22px;
+    }
+
+    &.active > ul {
+      /* if the item is active, make the subnavigation visible */
+      position: relative;
+      display: block;
+      /* reset style */
+      left: 0;
+      box-shadow: none;
+    }
+
+    .no-touch .cd-side-nav &:hover > ul,
+    .cd-side-nav &.hover > ul {
+      /* show subnavigation on hover */
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

@@ -1,0 +1,92 @@
+@import './partials/variables'; // custom variables
+
+@import './partials/mixins'; // custom mixins
+
+@import './partials/layout'; // responsive grid and media queries
+
+/* --------------------------------
+
+Standard page content.
+
+-------------------------------- */
+
+.cd-main-content > .content-wrapper > .content {
+
+  // ALL SCREENS:
+
+  padding: 2% 5% 2% 5%;
+
+  .welcome {
+    text-align: center;
+    .name-1 {
+      color: $color-name-1b;
+    }
+    .name-2 {
+      color: $color-name-2;
+    }
+  }
+
+  .basic-form {
+    // Bootstrap refinement.
+    .radio-inline, .checkbox-inline {
+      label {
+        font-weight: 400;
+        cursor: pointer;
+      }
+    }
+    .spacer {
+      height: 1%;
+    }
+  }
+
+  .output {
+
+    // General settings.
+    padding-top: 1.5%;
+    .panel-primary > .panel-body > .inner-box {
+      padding: 10px;
+      min-height: 300px;
+      overflow-y: scroll;
+    }
+
+    // Bootstrap refinement.
+    .panel-primary {
+      border-color: $color-menu-base;
+      .panel-heading {
+        background-color: $color-menu-base;
+        border-color: $color-menu-base;
+      }
+    }
+
+    // Command window settings.
+    &.tall {
+      .panel-primary > .panel-body > .inner-box {
+        height: 400px;
+      }
+    }
+
+  }
+
+
+
+
+
+  // MEDIUMS SCREENS ONLY:
+  @include MQ(M) {
+
+    //
+
+  }
+
+
+
+
+
+  // LARGE SCREENS ONLY:
+  @include MQ(L) {
+
+    //
+
+  }
+
+}

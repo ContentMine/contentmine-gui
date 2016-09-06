@@ -1,0 +1,69 @@
+extends layout
+
+block content
+  // header
+  header.cd-main-header
+    a.cd-logo(href='/')
+      img(src=vars.imagesPath+'/logos/contentmine-logo-small.svg', alt='Logo')
+      .name-holder
+        span.name-1 Content
+        span.name-2 Mine
+    .cd-search.is-hidden.disabled
+      form(action='#0')
+        input(type='search', placeholder='Search...')
+    a.cd-nav-trigger(href='#0')
+      .nav-trigger-text
+        Menu
+      span
+    nav.cd-nav
+      ul.cd-top-nav
+        li
+          a(href='http://contentmine.org/', target='_blank') Visit Website
+        li.cd-last-nav-item.has-children
+          a(href='#0')
+            img(src=vars.iconsPath+'cd-settings.svg', alt='settings')
+            |Settings
+          ul
+            li
+              a(href='#0') Placeholder 1
+            li
+              a(href='#0') Placeholder 2
+            li
+              a(href='#0') Placeholder 3
+  // main
+  main.cd-main-content
+    nav.cd-side-nav
+      ul
+        li.cd-label Project
+        li.action-btn
+          a(href='#0') + Create
+      ul
+        li.cd-label Tools
+        li.getpapers
+          a(href='/getpapers') GetPapers
+        li.quickscrape
+          a(href='/quickscrape') QuickScrape
+        li.norma
+          a(href='/norma') Norma
+        li.ami.has-children
+          a(href='/ami')
+            | Ami
+            span.count 5
+          ul
+            li
+              a(href='/ami') Species
+            li
+              a(href='/ami') Gene
+            li
+              a(href='/ami') Sequence
+            li
+              a(href='/ami') Regex
+            li
+              a(href='/ami') Word
+        li.command
+          a(href='/command') Command
+
+    // Page content:
+    .content-wrapper
+      // --- ANGULAR VIEW. ---
+      .content(ng-view)

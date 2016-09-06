@@ -1,0 +1,67 @@
+// Basic layout:
+doctype html
+// --- ANGULAR APP. ---
+html(lang="en" ng-app="contentMineApp")
+  // Head.
+  head
+    // General:
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport",content="width=device-width, initial-scale=1")
+    meta(name="description",content="")
+    meta(name="author",content="")
+    // Base URL:
+    base(href='/')
+    // Favicon:
+    link(rel='apple-touch-icon', sizes='60x60', href=vars.faviconPath+'apple-icon-60x60.png')
+    link(rel='apple-touch-icon', sizes='72x72', href=vars.faviconPath+'apple-icon-72x72.png')
+    link(rel='apple-touch-icon', sizes='76x76', href=vars.faviconPath+'apple-icon-76x76.png')
+    link(rel='apple-touch-icon', sizes='114x114', href=vars.faviconPath+'apple-icon-114x114.png')
+    link(rel='apple-touch-icon', sizes='120x120', href=vars.faviconPath+'apple-icon-120x120.png')
+    link(rel='apple-touch-icon', sizes='144x144', href=vars.faviconPath+'apple-icon-144x144.png')
+    link(rel='apple-touch-icon', sizes='152x152', href=vars.faviconPath+'apple-icon-152x152.png')
+    link(rel='apple-touch-icon', sizes='180x180', href=vars.faviconPath+'apple-icon-180x180.png')
+    link(rel='icon', type='image/png', sizes='192x192', href=vars.faviconPath+'android-icon-192x192.png')
+    link(rel='icon', type='image/png', sizes='32x32', href=vars.faviconPath+'favicon-32x32.png')
+    link(rel='icon', type='image/png', sizes='96x96', href=vars.faviconPath+'favicon-96x96.png')
+    link(rel='icon', type='image/png', sizes='16x16', href=vars.faviconPath+'favicon-16x16.png')
+    link(rel='icon',href=vars.faviconPath+'favicon.ico')
+    link(rel='manifest', href=vars.faviconPath+'manifest.json')
+    meta(name='msapplication-TileColor', content='#ffffff')
+    meta(name='msapplication-TileImage', content=vars.faviconPath+'ms-icon-144x144.png')
+    meta(name='theme-color', content='#ffffff')
+    // Title:
+    title= vars.title
+    // Refs:
+    block refs
+      // Scripts [LIBRARIES]:
+      script(src=vars.librariesPath+'jquery-2.1.4.min.js')
+      script(src=vars.librariesPath+'bootstrap-3.3.4.min.js')
+      script(src=vars.jsPath+'menu/jquery.menu-aim.js')
+      script(src=vars.librariesPath+'angular/angular.min.js')
+      script(src=vars.librariesPath+'angular-route/angular-route.min.js')
+      // Stylesheets:
+      link(rel='stylesheet', href=vars.stylesheetsPath+'reset.css')
+      link(rel='stylesheet', href=vars.stylesheetsPath+'menu.css')
+      link(rel='stylesheet', href=vars.stylesheetsPath+'bootstrap/bootstrap-3.3.4.min.css')
+      // -- Hosted alternatives --
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+        link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700', rel='stylesheet', type='text/css')
+        link(rel='stylesheet',href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+    block custom-refs
+      // Scripts:
+        None yet.
+      // Stylesheets:
+      link(rel='stylesheet', href=vars.stylesheetsPath+'content.css')
+  // Body.
+  body(data-spy="scroll",data-target=".scrollspy").custom-bgd
+    block body
+      block content
+      block body-end-refs
+        // Scripts [THAT AFFECT PAGE RENDERING]:
+        script(src=vars.jsPath+'menu/main.js')
+        script(src=vars.jsPath+'menu/modernizr.js')
+        script(src=vars.customJsPath+'app.js')
+        script(src=vars.customJsPath+'controllers.js')
+
