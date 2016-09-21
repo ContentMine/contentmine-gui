@@ -44,5 +44,8 @@ crashlytics-build.properties
 fabric.properties
 
 # EVGENY SAVELIEV CONFIGURED:
+## IntelliJ Files:
 .idea
 /*.iml
+## Node modules for server side only excluded (client side angular and friends still included):
+node_modules

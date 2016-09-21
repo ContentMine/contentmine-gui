@@ -1,0 +1,12 @@
+{
+  "name": "contentmine-gui-public",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The client side of contentmine-gui.",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-socket-io": "^0.7.0",
+    "socket.io-client": "^1.4.8"
+  }
+}

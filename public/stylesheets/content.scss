@@ -61,8 +61,16 @@ Standard page content.
     // Command window settings.
     &.tall {
       .panel-primary > .panel-body > .inner-box {
-        height: 400px;
+        //height: 400px;
       }
+    }
+
+    // Perfect scrollbar.
+    .scroller {
+      white-space: pre-line;
+      height: 400px;
+      overflow-y: hidden;
+      position: relative;
     }
 
   }

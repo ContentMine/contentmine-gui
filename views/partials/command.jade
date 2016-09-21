@@ -7,4 +7,5 @@ block partial-content
     +submit("Submit","default","submit")(ng-click='form_submitCmd()')
   .output.tall
     +panel-primary('Output')
-      .inner-box(ng-bind-html="output")
+      perfect-scrollbar.scroller(id="output-panel", min-scrollbar-length="45", scroll-down="true", refresh-on-change="output")
+        .inner-box(ng-bind-html="output")

@@ -1,6 +1,8 @@
+// Requirements.
 var _exec = require('child_process').exec;
 var rtn = require('./display-output').rtn;
 var os = require('./detect-os');
+var EventEmitter = require('events');
 var _spawn = undefined; // Fixing the issue of the spawn method not working correctly on Windows below.
 if (os === 'Windows') {
     _spawn = require('cross-spawn');
@@ -8,8 +10,9 @@ if (os === 'Windows') {
     _spawn = require('child_process').spawn;
 }
 
-// A helper set of methods for various child process command executions.
-var execCmd = {};
+
+
+
 
 // Variables.
 var errTextStdNote = 'ContentMine Error: ';
@@ -17,7 +20,18 @@ var errTextCmdEx = 'Error in command execution.';
 var errTextErrDets = 'Error details:';
 var errTextCmdErrOut = 'Command\'s error output:';
 
+
+
+
+
 // Export items:
+
+
+
+// Object to be exported.
+var execCmd = {};
+
+
 
 // Simple exec method.
 execCmd.exec = function(cmd, funcToRun) {
@@ -62,26 +76,59 @@ execCmd.exec = function(cmd, funcToRun) {
     });
 };
 
-// Spawn method, potentially more powerful.
-execCmd.spawn = function(cmd, funcToRun) {
-    var spawnee = _spawn(cmd);
+
+
+// Spawn method, more powerful.
+execCmd.spawn = function(cmd) {
+
+    // Variables:
+
+    var spawnee;
+    var events = new EventEmitter();
+
+    var cmdParamArr = [];
+
     var results = '';
     var results_stderr = '';
+
+    // Prep:
+    var cmdSplit = cmd.split(' ');
+    var cmdActual = cmdSplit[0];
+    var cmdArgs = cmdSplit.slice(1);
+
+    console.log(cmdArgs);
+    spawnee = _spawn(cmdActual, cmdArgs);
+
+    // Events:
+
     spawnee.stdout.on('data', function (data) {
-        if (typeof(data) === 'string') {
-            results += data;
-        } else {
-            results += data.toString();
+
+        if (data !== undefined) {
+            if (typeof(data) === 'string') {
+                results += data;
+            } else {
+                results += data.toString();
+            }
         }
+
+        events.emit('dataOut', results);
+
     });
+
     spawnee.stderr.on('data', function (data) {
+
         if (typeof(data) === 'string') {
             results_stderr += data;
         } else {
             results_stderr += data.toString();
         }
+
+        events.emit('dataOut', results);
+
     });
+
     spawnee.on('close', function (code) {
+
         if (code !== 0) {
             if (results_stderr !== '') {
                 results +=
@@ -90,7 +137,6 @@ execCmd.spawn = function(cmd, funcToRun) {
                     errTextCmdErrOut + rtn +
                     results_stderr;
             }
-            funcToRun(results);
         } else {
             if (results_stderr !== '') {
                 results +=
@@ -98,16 +144,29 @@ execCmd.spawn = function(cmd, funcToRun) {
                     errTextCmdErrOut + rtn +
                     results_stderr;
             }
-            funcToRun(results);
         }
+
+        events.emit('dataOut', results);
+
     });
+
     spawnee.on('error', function(err){
+
         results +=
             errTextStdNote + errTextCmdEx + rtn +
             JSON.stringify(err);
-        funcToRun(results);
+
+        events.emit('dataOut', results);
+
     });
+
+    return events;
+
 };
+
+
+
+
 
 // Export.
 module.exports = execCmd;

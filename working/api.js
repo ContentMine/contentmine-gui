@@ -1,5 +1,6 @@
 /*
  * Command execution API.
+ * DEPRECATED - Socket.IO now used.
  */
 
 // The API object.
@@ -19,8 +20,8 @@ var data = {
 api.cmd = function (req, res) {
 
 
-    var execCmd = require('../working/exec-cmd');
-    var dspl = require('../working/display-output').display;
+    var execCmd = require('exec-cmd');
+    var dspl = require('display-output').display;
 
     execCmd.exec(req.body.command, function(results) {
         //res.json({commandOutput: results});

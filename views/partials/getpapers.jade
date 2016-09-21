@@ -16,4 +16,4 @@ block partial-content
     +submit("Execute","default","execute")(ng-click='executeCmd()',ng-disabled='!form.submit_enabled')
   .output
     +panel-primary('Output')
-      .inner-box(ng-bind-html="output")
+      .inner-box(id="output-panel", ng-bind-html="output")

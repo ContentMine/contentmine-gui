@@ -1,7 +1,7 @@
 function IndexCtrl($scope, $http) {
     //
 }
-function GetPapersCtrl($scope, $http, $sce, CommandData, CommandParser, ProgramData) {
+function GetPapersCtrl($scope, $sce, CommandData, CommandParser, ProgramData, StdCmdExec) {
 
     var commandData = CommandData;
     var programData = ProgramData.getpapers;
@@ -66,12 +66,14 @@ function GetPapersCtrl($scope, $http, $sce, CommandData, CommandParser, ProgramD
         commandData.programName = '';
         commandData.command = parsedCommand;
 
-        //console.log(commandData);
-
+        /*
         $http.post('/api/cmd', commandData).
         success(function(response) {
             $scope.output = $sce.trustAsHtml(response);
         });
+        */
+
+        StdCmdExec(commandData, '#output-panel', $scope, $sce);
 
     };
 }
@@ -84,7 +86,7 @@ function NormaCtrl($scope, $http) {
 function AmiCtrl($scope, $http) {
     //
 }
-function CommandCtrl($scope, $http, $sce, CommandData) {
+function CommandCtrl($scope, $sce, CommandData, StdCmdExec) {
 
     var commandData = CommandData;
 
@@ -92,12 +94,7 @@ function CommandCtrl($scope, $http, $sce, CommandData) {
 
         commandData.command = $scope.form_command;
 
-        console.log(commandData);
-
-        $http.post('/api/cmd', commandData).
-        success(function(response) {
-            $scope.output = $sce.trustAsHtml(response);
-        });
+        StdCmdExec(commandData, '#output-panel', $scope, $sce);
 
     };
 

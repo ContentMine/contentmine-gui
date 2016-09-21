@@ -35,15 +35,21 @@ html(lang="en" ng-app="contentMineApp")
     // Refs:
     block refs
       // Scripts [LIBRARIES]:
-      script(src=vars.librariesPath+'jquery-2.1.4.min.js')
-      script(src=vars.librariesPath+'bootstrap-3.3.4.min.js')
-      script(src=vars.jsPath+'menu/jquery.menu-aim.js')
+      script(src=vars.librariesPath+'jquery/jquery-2.1.4.min.js')
+      script(src=vars.librariesPath+'bootstrap/bootstrap-3.3.4.min.js')
       script(src=vars.librariesPath+'angular/angular.min.js')
       script(src=vars.librariesPath+'angular-route/angular-route.min.js')
+      script(src=vars.librariesPath + 'socket.io-client/socket.io.js')
+      script(src=vars.librariesPath + 'angular-socket-io/socket.min.js')
+      script(src=vars.librariesPath + 'angular-perfect-scrollbar/perfect-scrollbar.min.js')
+      script(src=vars.librariesPath + 'angular-perfect-scrollbar/angular-perfect-scrollbar.js')
+      script(src=vars.jsPath+'menu/jquery.menu-aim.js')
+      script(src=vars.jsPath+'testing.js')
       // Stylesheets:
       link(rel='stylesheet', href=vars.stylesheetsPath+'reset.css')
       link(rel='stylesheet', href=vars.stylesheetsPath+'menu.css')
       link(rel='stylesheet', href=vars.stylesheetsPath+'bootstrap/bootstrap-3.3.4.min.css')
+      link(rel='stylesheet', href=vars.stylesheetsPath+'angular-perfect-scrollbar/perfect-scrollbar.min.css')
       // -- Hosted alternatives --
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js')
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')

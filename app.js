@@ -1,3 +1,5 @@
+// --- Requirements ---
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -10,16 +12,28 @@ var partials = require('./routes/partials');
 var test = require('./routes/test');
 var api = require('./routes/api');
 
-// Custom js files.
+// Custom js files
 var cmdHandler = require('./working/cmd-handler');
+var socketEvents = require('./working/socket');
 
+// App
 var app = express();
 
-// view engine setup
+// Socket.IO
+var server = require('http').Server(app);
+var SocketIO = require('socket.io')(server);
+
+
+
+
+
+// --- Set-up ---
+
+// View engine set-up.
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
+// Auto-generated intial set-up:
 app.use(favicon(path.join(__dirname, 'public/images/favicon/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -54,7 +68,7 @@ app.locals.vars =
 };
 
 // Custom middleware.
-//app.use('/', cmdHandler);
+//
 
 // Routes registration.
 app.use('/', routes);
@@ -71,7 +85,21 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
+// Socket.IO.
+SocketIO.on('connection', socketEvents);
+
+/*
+app.use(function(req, res, next){
+  res.SocketIO = SocketIO;
+  next();
+});
+*/
+
+
+
+
+
+// --- Error handlers ---
 
 // development error handler
 // will print stacktrace
@@ -96,4 +124,9 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+
+
+
+// --- Exports ---
+
+module.exports = {app: app, server: server};

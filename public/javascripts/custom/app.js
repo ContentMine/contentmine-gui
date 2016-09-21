@@ -5,15 +5,14 @@
 
 
 // App:
-
-var app = angular.module('contentMineApp', ['ngRoute']);
-
+var app = angular.module('contentMineApp', ['ngRoute', 'btford.socket-io', 'perfect_scrollbar']);
 
 
 
 
-// Config:
 
+// App config:
+//<editor-fold desc="App config">
 app.config(function($routeProvider, $locationProvider) {
 
     // Angular Routes.
@@ -55,6 +54,7 @@ app.config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 
 });
+//</editor-fold>
 
 
 
@@ -62,22 +62,70 @@ app.config(function($routeProvider, $locationProvider) {
 
 // Services:
 
-// Command Data
+// Socket.IO service.
+//<editor-fold desc="Socket.IO service.">
+app.factory('SocketIO', function (socketFactory) {
+    return socketFactory({
+        // TODO: Update with the proper port.
+        ioSocket: io.connect('http://localhost:3000')
+    });
+});
+//</editor-fold>
+
+// Standard command execution routine.
+//<editor-fold desc="Standard command execution.">
+app.factory('StdCmdExec', ['SocketIO', function(SocketIO){
+    return function (commandData, outputElementId, $scope, $sce) {
+
+        console.log("Command to be executed: " + commandData.command);
+
+        var outputPanel = $(outputElementId);
+        var safetyDelay = 100;
+        var animationDuration = 200;
+
+        SocketIO.emit('cmd:Spawn', commandData);
+        SocketIO.on('cmd:SpawnFinished', function(response) {
+            $scope.output = $sce.trustAsHtml(response);
+            /* // OLD //
+            setTimeout(function(){
+            console.log("scr");
+                outputPanel.animate({ scrollTop: outputPanel.prop('scrollHeight') }, animationDuration);
+            },
+            safetyDelay);
+            */
+        });
+
+        /* // OLD //
+         SocketIO.emit('cmd:Exec', commandData);
+         SocketIO.on('cmd:ExecFinished', function(response) {
+         $scope.output = $sce.trustAsHtml(response);
+         });
+         */
+
+    }
+}]);
+//</editor-fold>
+
+// Command Data.
+//<editor-fold desc="Command Data.">
 app.factory('CommandData', function(){
     return {
         programName: '', // getpapers, quickscrape, norma, ami, [command].
         command: '' // full command as string.
     }
 });
+//</editor-fold>
 
-// Command Parser (class-like)
+// Command Parser (class-like).
+//<editor-fold desc="Command Parser.">
 app.factory('CommandParser', function() {
     return function(programData, formData) {
         this.programName = programData;
         this.formData = formData;
 
         // TODO: Adapt to OS's.
-        this.defaultDirectory = 'C:\\Temp\\test';
+        // TODO: set the directory up properly.
+        this.defaultDirectory = "C:\\Temp\\test\\test2";
 
         // Parsing method: -----------------------------------
 
@@ -95,7 +143,7 @@ app.factory('CommandParser', function() {
                     finalCommand += programData.params.query + ' ' + formData.query + ' ';
                 } else throw new Error('Query was not specified.');
                 // Output.
-                finalCommand += programData.params.outdir + ' ' + '\"' +this.defaultDirectory + '\"' + ' '; // TODO: set this up properly.
+                finalCommand += programData.params.outdir + ' ' + this.defaultDirectory + ' ';//'\"' + this.defaultDirectory + '\"' + ' ';
                 // [OPTIONAL]:
                 // API.
                 finalCommand += programData.params.api + ' ' + formData.api + ' ';
@@ -119,8 +167,10 @@ app.factory('CommandParser', function() {
         // ---------------------------------------------------
     };
 });
+//</editor-fold>
 
-// Programs Data
+// Programs Data.
+//<editor-fold desc="Programs Data.">
 app.factory('ProgramData', function(){
     return {
         getpapers: {
@@ -178,3 +228,4 @@ app.factory('ProgramData', function(){
         }
     }
 });
+//</editor-fold>
