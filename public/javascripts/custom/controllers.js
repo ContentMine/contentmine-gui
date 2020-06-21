@@ -47,7 +47,7 @@ function GetPapersCtrl($scope, $sce, CommandData, CommandParser, ProgramData, St
         }
     });
 
-    // Update the execute button structure when query avlue changed.
+    // Update the execute button structure when query value changed.
     $scope.$watch('form.query', function(newValue, oldValue) {
         if ($scope.form.query !== undefined && $scope.form.query !== '') {
             $scope.form.submit_enabled = true;
